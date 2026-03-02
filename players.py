@@ -24,8 +24,8 @@ class Player:
         Docstrings
         """
         for piece in self.pieces:
-            currentPosition = (piece.pos.x, piece.pos.y)
-            if currentPosition == pos1 and pos2 in piece.moves(gamestate):
+            current_position = (piece.pos.x, piece.pos.y)
+            if current_position == pos1 and pos2 in piece.moves(gamestate):
                 piece.pos.x, piece.pos.y = pos2
                 if piece.string == 'P' and piece.pos.y == piece.endingLine:
                     self.promote(piece)
@@ -38,8 +38,8 @@ class Player:
         Docstrings
         """
         for piece in self.pieces:
-            currentPosition = (piece.pos.x, piece.pos.y)
-            if currentPosition == pos1 and pos2 in piece.captures(board):
+            current_position = (piece.pos.x, piece.pos.y)
+            if current_position == pos1 and pos2 in piece.captures(board):
                 piece.pos.x, piece.pos.y = pos2
                 opponent.removePiece(pos2)
                 if piece.string == 'P' and piece.pos.y == piece.endingLine:

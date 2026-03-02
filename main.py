@@ -86,7 +86,7 @@ class Game:
                             if self.player1.turn:
                                 opponent = [(piece.pos.x, piece.pos.y) for piece in self.player2.pieces]
                                 if pos2 in opponent:
-                                    self.player1.eat(self.player2, pos1, pos2, self.gamestate)
+                                    self.player1.eat(self.player2, pos1, pos2, se`lf.gamestate)
                                 else:
                                     self.player1.move(pos1, pos2, self.gamestate)
 
