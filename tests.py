@@ -33,7 +33,7 @@ num = bin(decimal_number)[2:][::-1]
 def convert_integer_to_board_representation(number: int) -> str:
     return bin(number)
 
-print(convert_integer_to_board_representation(decimal_number))
+# print(convert_integer_to_board_representation(decimal_number))
 
 
 
