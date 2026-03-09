@@ -10,19 +10,19 @@ class Position(Window):
         self.vectors = [(0, 1), (0, -1), (-1, 0), (1, 0), (1, 1), (1, -1), (-1, -1), (-1, 1)]
         self.conversion = dict(zip(range(1, 9), 'abcdefgh'))
 
-    def convert_inString(self, coord):
+    def convert_in_string(self, coord):
         """
         Docstrings
         """
         return self.conversion[coord[0]] + str(coord[1])
 
-    def convert_inPixel(self):
+    def convert_in_pixel(self):
         """
         Docstrings
         """
         return self.cellDimension*(self.x - 1), self.screenDimension[0] - self.cellDimension*self.y
 
-    def convert_inBoardCoordinate(self):
+    def convert_in_board_coordinate(self):
         """
         Docstrings
         """

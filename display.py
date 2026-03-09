@@ -48,7 +48,7 @@ class Window:
         self.screen.blit(self.board, (0, 0))
 
         for piece in chain(self.player1.pieces, self.player2.pieces):
-            position = piece.pos.convert_inPixel()
+            position = piece.pos.convert_in_pixel()
             self.screen.blit(piece.image, position)
 
         pygame.display.update()

@@ -39,7 +39,7 @@ class History:
         """
         pos1, pos2 = move
 
-        return Position().convert_inString(pos1) + Position().convert_inString(pos2)
+        return Position().convert_in_string(pos1) + Position().convert_in_string(pos2)
 
 class Game:
     """
@@ -79,8 +79,8 @@ class Game:
                     elif click1.x and click1.y:
                         click2.x, click2.y = event.pos
 
-                        pos1 = click1.convert_inBoardCoordinate()
-                        pos2 = click2.convert_inBoardCoordinate()
+                        pos1 = click1.convert_in_board_coordinate()
+                        pos2 = click2.convert_in_board_coordinate()
 
                         try:
                             if self.player1.turn:
