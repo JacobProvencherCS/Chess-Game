@@ -1,82 +1,77 @@
-import numpy as np
-import sys
+from enum import Enum
+
+class Piece(Enum):
+
+    BP = 0
+    BR = 1
+    BN = 2
+    BB = 3
+    BQ = 4
+    BK = 5
+
+    WP = 6
+    WR = 7
+    WN = 8
+    WB = 9
+    WQ = 10
+    WK = 11
+
+    BO = 12
+    WO = 13
+
+    AO = 14
+
+black_rooks = (1 << 63) | (1 << 56)
+black_knights = (1 << 62) | (1 << 57)
+black_bishops = (1 << 61) | (1 << 58)
+black_queen = (1 << 60)
+black_king = (1 << 59)
+black_pawns = 0
+for i in range(48, 56):
+    black_pawns |= 1 << i
+
+
+white_rooks = (1 << 7) | (1 << 0)
+white_knights = (1 << 6) | (1 << 1)
+white_bishops = (1 << 5) | (1 << 2)
+white_queen = (1 << 4)
+white_king = (1 << 3)
+white_pawns = 0
+for i in range(7, 16):
+    white_pawns |= 1 << i
+
+black_occupancy = black_pawns | black_rooks | black_knights | black_bishops | black_queen | black_king
+white_occupancy = white_pawns | white_rooks | white_knights | white_bishops | white_queen | white_king
+
+all_occupancy = black_occupancy |white_occupancy
+
+pieces = [
+    black_pawns, black_rooks, black_knights, black_bishops, black_queen, black_king,
+    white_pawns, white_rooks, white_knights, white_bishops, white_queen, white_king,
+    black_occupancy, white_occupancy,
+    all_occupancy
+]
+
+for piece in Piece:
+    print(f"{piece}: {bin(pieces[piece.value])}")
+
 
 """
-board = np.array([
-    [2, 4, 3, 5, 6, 4, 3, 2],
-    [1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [9, 9, 9, 9, 9, 9, 9, 9],
-    [10, 11, 12, 13, 14, 12, 11, 10]
-])
+Piece.BP: 0b11111111000000000000000000000000000000000000000000000000
+Piece.BR: 0b1000000100000000000000000000000000000000000000000000000000000000
+Piece.BN: 0b100001000000000000000000000000000000000000000000000000000000000
+Piece.BB: 0b10010000000000000000000000000000000000000000000000000000000000
+Piece.BQ: 0b1000000000000000000000000000000000000000000000000000000000000
+Piece.BK: 0b100000000000000000000000000000000000000000000000000000000000
+Piece.WP: 0b1111111110000000
+Piece.WR: 0b10000001
+Piece.WN: 0b1000010
+Piece.WB: 0b100100
+Piece.WQ: 0b10000
+Piece.WK: 0b1000
+Piece.BO: 0b1111111111111111000000000000000000000000000000000000000000000000
+Piece.WO: 0b1111111111111111
+Piece.AO: 0b1111111111111111000000000000000000000000000000001111111111111111
 """
 
-board = np.zeros((8, 8), dtype=int)
 
-def get_position(num: int) -> tuple[int, int]:
-
-    index = num.bit_length() - 1
-    row = 7 - index // 8
-    col = 7 - index % 8
-
-    return row, col
-
-
-piece = 0b1000_1110
-mask = 0b1111
-# board[piece.position] = piece.info (where piece.position = 1000 and piece.info = 1110)
-
-
-print(get_position(0b1000)) # (0, 3) -> (7, 4)
-print(get_position(0b10_0000_0000_0000)) # (6, 2)
-print(get_position(0b1000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000)) # (0, 0)
-
-# pieces
-# pieces -> board
-# board -> display
-
-# todo : write every piece integer representation in a numpy array (piece array)
-# todo : loop through piece array to add them to a board array
-# todo : display clean formatted board using board array
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# white_pawn_d2 = int(0b1_0000_0000_0000_1000)
-# black_queen_c6 = int(0b0010_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0101)
-
-### Convert binary number to 2D array
-# First method
-x = 0b1010101010101010101010101010101010101010101010101010101010101010
-bits = np.array(list(np.binary_repr(x, width=64)), dtype=int)
-matrix = bits.reshape((8, 8))
-
-# Second method (cleaner)
-x = np.array([142], dtype=np.uint64)
-bits = np.unpackbits(x.view(np.uint8))
-matrix = bits.reshape(8, 8)
-
-# One-liner
-x = 0b1000_1110
-matrix = np.unpackbits(np.array([x], dtype=np.uint64).view(np.uint8)).reshape(8, 8)
