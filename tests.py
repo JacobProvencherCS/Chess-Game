@@ -65,3 +65,6 @@ print(req_binaire_formate(pieces[WQ] << 8 >> 1)) # move one up-right
 
 
 
+
+
+
